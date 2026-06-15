@@ -3,12 +3,12 @@ set -euo pipefail
 
 CLAUDE_DIR="${CLAUDE_DIR:-$HOME/.claude}"
 
-# Rewrite machine-specific paths in settings.json
+# Rewrite machine-specific hook paths in settings.json
 if [[ -f "$CLAUDE_DIR/settings.json" ]]; then
   if [[ "$(uname)" == "Darwin" ]]; then
-    sed -i '' "s|/Users/[^/]*/.claude|$HOME/.claude|g" "$CLAUDE_DIR/settings.json"
+    sed -i '' "s|/Users/[^/]*/\.claude[^/\"]*|$CLAUDE_DIR|g" "$CLAUDE_DIR/settings.json"
   else
-    sed -i "s|/Users/[^/]*/.claude|$HOME/.claude|g" "$CLAUDE_DIR/settings.json"
+    sed -i "s|/Users/[^/]*/\.claude[^/\"]*|$CLAUDE_DIR|g" "$CLAUDE_DIR/settings.json"
   fi
 fi
 
