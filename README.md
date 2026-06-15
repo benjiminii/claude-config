@@ -179,20 +179,42 @@ claude-work
 
 | Task | Command |
 |------|---------|
-| Pull config updates | `cd ~/.claude-work && git pull` |
+| Pull config into a profile dir | see below — don't use `git pull` |
 | Push config changes | `cd ~/.claude && git add -A && git commit -m "..." && git push` |
 | Fix hook paths after clone | `CLAUDE_DIR=~/.claude-work ~/.claude-work/install.sh` |
 
-## Day-to-day sync
+### Sync updates into a profile dir (`~/.claude-work`, etc.)
+
+Don't use `git pull` here — it fails when config files already exist as untracked files, and it would overwrite your local `settings.json`.
 
 ```bash
-cd ~/.claude          # or ~/.claude-work, etc.
-git pull              # get changes from other devices
+cd ~/.claude-work
+git fetch origin
+git checkout origin/main -- .gitignore skills hooks CLAUDE.md install.sh
+CLAUDE_DIR=~/.claude-work ./install.sh
+```
+
+This updates shared config while keeping your work-specific `settings.json`.
+
+## Day-to-day sync
+
+**Personal profile** (`~/.claude`) — edit, commit, and push here:
+
+```bash
+cd ~/.claude
+git pull
 # edit skills, hooks, settings...
 git add -A && git commit -m "update graphify skill" && git push
 ```
 
-Same repo can be cloned into multiple profile dirs. Each is independent — `git pull` in each when you want updates.
+**Work/school profiles** — pull updates from the repo (don't commit from these dirs):
+
+```bash
+cd ~/.claude-work
+git fetch origin
+git checkout origin/main -- .gitignore skills hooks CLAUDE.md install.sh
+CLAUDE_DIR=~/.claude-work ./install.sh
+```
 
 ## Plugins
 
