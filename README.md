@@ -89,8 +89,19 @@ If you already have `~/.claude-work` but no skills/hooks from this repo:
 ```bash
 cd ~/.claude-work
 git init && git remote add origin git@github.com:benjiminii/claude-config.git
-git fetch && git checkout origin/main -- skills hooks CLAUDE.md install.sh .gitignore
+git fetch
+# .gitignore first — without it, git shows every runtime file as untracked
+git checkout origin/main -- .gitignore
+git checkout origin/main -- skills hooks CLAUDE.md install.sh
 CLAUDE_DIR=~/.claude-work ./install.sh
+```
+
+> **Don't `git add -A` before `.gitignore` is in place.** Your profile dir already has chat history, plugins, sessions, etc. The gitignore hides those. Only the config files (skills, hooks, CLAUDE.md) should be tracked.
+
+Your local `settings.json` is intentionally **not** checked out — work/school profiles often differ from personal. Keep your existing one, or pull it explicitly if you want them identical:
+
+```bash
+git checkout origin/main -- settings.json   # only if you want to overwrite
 ```
 
 ## Shell setup (`~/.zshrc`)

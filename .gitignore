@@ -18,6 +18,7 @@ backups/
 plugins/
 
 # Local state & caches
+.claude.json
 .caveman-active
 .last-cleanup
 .last-update-result.json
