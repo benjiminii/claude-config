@@ -1,0 +1,31 @@
+# Runtime / session data (device-local)
+projects/
+history.jsonl
+sessions/
+session-env/
+file-history/
+shell-snapshots/
+paste-cache/
+image-cache/
+telemetry/
+tasks/
+cache/
+chrome/
+downloads/
+backups/
+
+# Plugin caches & machine-local install state (reinstall via Claude Code)
+plugins/
+
+# Local state & caches
+.caveman-active
+.last-cleanup
+.last-update-result.json
+mcp-needs-auth-cache.json
+policy-limits.json
+remote-settings.json
+stats-cache.json
+settings.json.bak
+
+# OS
+.DS_Store
